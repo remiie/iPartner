@@ -107,5 +107,4 @@ extension AllCardsView: UICollectionViewDelegateFlowLayout {
             delegate?.hideNavBar() } else { delegate?.showNavBar() }
     }
     
-    
 }

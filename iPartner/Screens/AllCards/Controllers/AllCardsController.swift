@@ -39,6 +39,10 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
         navigationController?.navigationBar.titleTextAttributes = condition ? [
             NSAttributedString.Key.foregroundColor : UIColor.white
         ] : nil
+        if #available(iOS 15.0, *) {
+            navigationController?.navigationBar.compactScrollEdgeAppearance = navigationController?.navigationBar.compactAppearance
+        }
+        
     }
     fileprivate func configure() {
         view.backgroundColor = .systemGreen
@@ -75,6 +79,7 @@ extension AllCardsController: AllCardsViewDelegate {
     
     func showNavBar() {
         navigationController?.setNavigationBarHidden(false, animated: true)
+      
     }
     
     
