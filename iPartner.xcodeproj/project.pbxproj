@@ -29,6 +29,12 @@
 		B6CDF82E2A02B87C00043489 /* AllCardsViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF82D2A02B87C00043489 /* AllCardsViewDelegate.swift */; };
 		B6CDF8302A02B98E00043489 /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF82F2A02B98E00043489 /* AllCardsView.swift */; };
 		B6CDF8322A02C24300043489 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF8312A02C24300043489 /* CardCell.swift */; };
+		B6CDF8392A0314EC00043489 /* CardDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF8382A0314EC00043489 /* CardDetailController.swift */; };
+		B6CDF83B2A03151400043489 /* CardDetailControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF83A2A03151400043489 /* CardDetailControllerProtocol.swift */; };
+		B6CDF83D2A03155500043489 /* CardDetailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF83C2A03155500043489 /* CardDetailViewProtocol.swift */; };
+		B6CDF83F2A03159700043489 /* CardDetailPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF83E2A03159700043489 /* CardDetailPresenterProtocol.swift */; };
+		B6CDF8412A0315AC00043489 /* CardDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF8402A0315AC00043489 /* CardDetailPresenter.swift */; };
+		B6CDF8432A0315ED00043489 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF8422A0315ED00043489 /* CardDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +62,12 @@
 		B6CDF82D2A02B87C00043489 /* AllCardsViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsViewDelegate.swift; sourceTree = "<group>"; };
 		B6CDF82F2A02B98E00043489 /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
 		B6CDF8312A02C24300043489 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
+		B6CDF8382A0314EC00043489 /* CardDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailController.swift; sourceTree = "<group>"; };
+		B6CDF83A2A03151400043489 /* CardDetailControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailControllerProtocol.swift; sourceTree = "<group>"; };
+		B6CDF83C2A03155500043489 /* CardDetailViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailViewProtocol.swift; sourceTree = "<group>"; };
+		B6CDF83E2A03159700043489 /* CardDetailPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailPresenterProtocol.swift; sourceTree = "<group>"; };
+		B6CDF8402A0315AC00043489 /* CardDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailPresenter.swift; sourceTree = "<group>"; };
+		B6CDF8422A0315ED00043489 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +134,7 @@
 			children = (
 				B6C44FA72A0288920002341C /* Main */,
 				B6CDF81E2A02B66400043489 /* AllCards */,
+				B6CDF8332A03143E00043489 /* CardDetail */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -251,6 +264,51 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		B6CDF8332A03143E00043489 /* CardDetail */ = {
+			isa = PBXGroup;
+			children = (
+				B6CDF8372A0314A100043489 /* Views */,
+				B6CDF8352A03148800043489 /* Protocols */,
+				B6CDF8342A03147A00043489 /* Presenters */,
+				B6CDF8362A03148E00043489 /* Controllers */,
+			);
+			path = CardDetail;
+			sourceTree = "<group>";
+		};
+		B6CDF8342A03147A00043489 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				B6CDF8402A0315AC00043489 /* CardDetailPresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
+		B6CDF8352A03148800043489 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B6CDF83C2A03155500043489 /* CardDetailViewProtocol.swift */,
+				B6CDF83A2A03151400043489 /* CardDetailControllerProtocol.swift */,
+				B6CDF83E2A03159700043489 /* CardDetailPresenterProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		B6CDF8362A03148E00043489 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B6CDF8382A0314EC00043489 /* CardDetailController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B6CDF8372A0314A100043489 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B6CDF8422A0315ED00043489 /* CardDetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -322,12 +380,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6CDF82A2A02B75B00043489 /* AllCardsPresenter.swift in Sources */,
+				B6CDF83F2A03159700043489 /* CardDetailPresenterProtocol.swift in Sources */,
 				B6CDF82E2A02B87C00043489 /* AllCardsViewDelegate.swift in Sources */,
+				B6CDF8432A0315ED00043489 /* CardDetailView.swift in Sources */,
 				B6C44FB02A0289440002341C /* Router.swift in Sources */,
 				B6C44FB42A028A580002341C /* MainPresenter.swift in Sources */,
+				B6CDF8412A0315AC00043489 /* CardDetailPresenter.swift in Sources */,
 				B6CDF82C2A02B83000043489 /* AllCardsViewProtocol.swift in Sources */,
 				B6CDF8262A02B70D00043489 /* AllCardsControllerProtocol.swift in Sources */,
 				B6CDF8242A02B6DF00043489 /* AllCardsController.swift in Sources */,
+				B6CDF83D2A03155500043489 /* CardDetailViewProtocol.swift in Sources */,
+				B6CDF8392A0314EC00043489 /* CardDetailController.swift in Sources */,
 				B6C44FB82A028AB80002341C /* MainViewProtocol.swift in Sources */,
 				B6CDF8182A02A87D00043489 /* MainView.swift in Sources */,
 				B6CDF81A2A02A9A800043489 /* MainViewDelegate.swift in Sources */,
@@ -336,6 +399,7 @@
 				B6CDF8282A02B74700043489 /* AllCardsPresenterProtocol.swift in Sources */,
 				B6C44FB22A0289540002341C /* RouterProtocol.swift in Sources */,
 				B6C44FBC2A028C7B0002341C /* Resources.swift in Sources */,
+				B6CDF83B2A03151400043489 /* CardDetailControllerProtocol.swift in Sources */,
 				B6CDF8322A02C24300043489 /* CardCell.swift in Sources */,
 				B6CDF8302A02B98E00043489 /* AllCardsView.swift in Sources */,
 				B67CC56A2A028665001CFF76 /* AppDelegate.swift in Sources */,

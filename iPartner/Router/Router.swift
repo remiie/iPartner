@@ -31,4 +31,11 @@ final class Router: RouterProtocol {
         navigation.pushViewController(allCardsController, animated: true)
     }
     
+    func openCardDetailScreen() {
+        let cardDetailController = CardDetailController()
+        let cardDetailPresenter = CardDetailPresenter(router: self, view: cardDetailController.cardDetailView)
+        cardDetailController.presenter = cardDetailPresenter
+        navigation.pushViewController(cardDetailController, animated: true)
+    }
+    
 }

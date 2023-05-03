@@ -10,4 +10,5 @@ import UIKit
 protocol RouterProtocol: AnyObject {
     func prepareInitialScreen() -> UIViewController
     func openAllCardsScreen()
+    func openCardDetailScreen()
 }

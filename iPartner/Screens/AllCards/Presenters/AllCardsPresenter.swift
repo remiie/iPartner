@@ -16,6 +16,10 @@ final class AllCardsPresenter: AllCardsPresenterProtocol {
         return Resources.AllCardsScreen.emptyImageName
     }
     
+    func selectCard(at index: Int) {
+        router?.openCardDetailScreen()
+    }
+    
     
     private var router: RouterProtocol?
     private weak var view: AllCardsViewProtocol?

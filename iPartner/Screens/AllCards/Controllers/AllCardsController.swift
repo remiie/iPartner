@@ -43,7 +43,7 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
     
     func colorizeNavBar(_ condition: Bool) {
         navigationController?.navigationBar.topItem?.title = " "
-        navigationController?.navigationBar.tintColor = condition ? .white : .black
+        navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = condition ? [
             NSAttributedString.Key.foregroundColor : UIColor.white
         ] : nil
@@ -93,7 +93,7 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
 
 extension AllCardsController: AllCardsViewDelegate {
     func selectCard(at index: Int) {
-        print("select card at \(index)")
+        presenter?.selectCard(at: index)
     }
     
     func getItemsCount() -> Int {
