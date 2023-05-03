@@ -53,6 +53,7 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
             allCardsView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    
 }
 
 extension AllCardsController: AllCardsViewDelegate {
@@ -61,12 +62,19 @@ extension AllCardsController: AllCardsViewDelegate {
     }
     
     func getItemsCount() -> Int {
-        return 2
+        return 10
     }
     
     func getCardData(at index: Int) -> CardData {
         let data = ("Title", "Description", UIImage(named: Resources.AllCardsScreen.emptyImageName))
         return data
+    }
+    func hideNavBar() {
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    func showNavBar() {
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     
