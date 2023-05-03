@@ -24,5 +24,11 @@ final class Router: RouterProtocol {
     }
     
     
+    func openAllCardsScreen() {
+        let allCardsController = AllCardsController()
+        let allCardsPresenter = AllCardsPresenter(router: self, view: allCardsController.allCardsView)
+        allCardsController.presenter = allCardsPresenter
+        navigation.pushViewController(allCardsController, animated: true)
+    }
     
 }
