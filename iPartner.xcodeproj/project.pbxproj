@@ -9,22 +9,25 @@
 /* Begin PBXBuildFile section */
 		B67CC56A2A028665001CFF76 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67CC5692A028665001CFF76 /* AppDelegate.swift */; };
 		B67CC56C2A028665001CFF76 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67CC56B2A028665001CFF76 /* SceneDelegate.swift */; };
-		B67CC56E2A028665001CFF76 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67CC56D2A028665001CFF76 /* MainViewController.swift */; };
+		B67CC56E2A028665001CFF76 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B67CC56D2A028665001CFF76 /* MainController.swift */; };
 		B67CC5732A028666001CFF76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B67CC5722A028666001CFF76 /* Assets.xcassets */; };
 		B67CC5762A028666001CFF76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B67CC5742A028666001CFF76 /* LaunchScreen.storyboard */; };
 		B6C44FB02A0289440002341C /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C44FAF2A0289440002341C /* Router.swift */; };
 		B6C44FB22A0289540002341C /* RouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C44FB12A0289540002341C /* RouterProtocol.swift */; };
 		B6C44FB42A028A580002341C /* MainPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C44FB32A028A580002341C /* MainPresenter.swift */; };
 		B6C44FB62A028A830002341C /* MainPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C44FB52A028A830002341C /* MainPresenterProtocol.swift */; };
-		B6C44FB82A028AB80002341C /* MainViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C44FB72A028AB80002341C /* MainViewControllerProtocol.swift */; };
+		B6C44FB82A028AB80002341C /* MainViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C44FB72A028AB80002341C /* MainViewProtocol.swift */; };
 		B6C44FBC2A028C7B0002341C /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6C44FBB2A028C7B0002341C /* Resources.swift */; };
+		B6CDF8182A02A87D00043489 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF8172A02A87D00043489 /* MainView.swift */; };
+		B6CDF81A2A02A9A800043489 /* MainViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF8192A02A9A800043489 /* MainViewDelegate.swift */; };
+		B6CDF81C2A02ABB400043489 /* MainControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF81B2A02ABB400043489 /* MainControllerProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		B67CC5662A028665001CFF76 /* iPartner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iPartner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B67CC5692A028665001CFF76 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B67CC56B2A028665001CFF76 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B67CC56D2A028665001CFF76 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		B67CC56D2A028665001CFF76 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		B67CC5722A028666001CFF76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B67CC5752A028666001CFF76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B67CC5772A028666001CFF76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -32,8 +35,11 @@
 		B6C44FB12A0289540002341C /* RouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterProtocol.swift; sourceTree = "<group>"; };
 		B6C44FB32A028A580002341C /* MainPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenter.swift; sourceTree = "<group>"; };
 		B6C44FB52A028A830002341C /* MainPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPresenterProtocol.swift; sourceTree = "<group>"; };
-		B6C44FB72A028AB80002341C /* MainViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerProtocol.swift; sourceTree = "<group>"; };
+		B6C44FB72A028AB80002341C /* MainViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewProtocol.swift; sourceTree = "<group>"; };
 		B6C44FBB2A028C7B0002341C /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		B6CDF8172A02A87D00043489 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		B6CDF8192A02A9A800043489 /* MainViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewDelegate.swift; sourceTree = "<group>"; };
+		B6CDF81B2A02ABB400043489 /* MainControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainControllerProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +123,7 @@
 		B6C44FA82A0288B70002341C /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B67CC56D2A028665001CFF76 /* MainViewController.swift */,
+				B67CC56D2A028665001CFF76 /* MainController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -125,8 +131,10 @@
 		B6C44FA92A0288CD0002341C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				B6C44FB72A028AB80002341C /* MainViewProtocol.swift */,
+				B6CDF8192A02A9A800043489 /* MainViewDelegate.swift */,
 				B6C44FB52A028A830002341C /* MainPresenterProtocol.swift */,
-				B6C44FB72A028AB80002341C /* MainViewControllerProtocol.swift */,
+				B6CDF81B2A02ABB400043489 /* MainControllerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -142,6 +150,7 @@
 		B6C44FAC2A0288F50002341C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B6CDF8172A02A87D00043489 /* MainView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -250,12 +259,15 @@
 			files = (
 				B6C44FB02A0289440002341C /* Router.swift in Sources */,
 				B6C44FB42A028A580002341C /* MainPresenter.swift in Sources */,
-				B6C44FB82A028AB80002341C /* MainViewControllerProtocol.swift in Sources */,
-				B67CC56E2A028665001CFF76 /* MainViewController.swift in Sources */,
+				B6C44FB82A028AB80002341C /* MainViewProtocol.swift in Sources */,
+				B6CDF8182A02A87D00043489 /* MainView.swift in Sources */,
+				B6CDF81A2A02A9A800043489 /* MainViewDelegate.swift in Sources */,
+				B67CC56E2A028665001CFF76 /* MainController.swift in Sources */,
 				B6C44FB62A028A830002341C /* MainPresenterProtocol.swift in Sources */,
 				B6C44FB22A0289540002341C /* RouterProtocol.swift in Sources */,
 				B6C44FBC2A028C7B0002341C /* Resources.swift in Sources */,
 				B67CC56A2A028665001CFF76 /* AppDelegate.swift in Sources */,
+				B6CDF81C2A02ABB400043489 /* MainControllerProtocol.swift in Sources */,
 				B67CC56C2A028665001CFF76 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
