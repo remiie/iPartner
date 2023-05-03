@@ -23,6 +23,12 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
+        colorizeNavBar(true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        colorizeNavBar(false)
     }
     
     func colorizeNavBar(_ condition: Bool) {
@@ -30,21 +36,21 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
         navigationController?.navigationBar.topItem?.title = " "
         navigationController?.navigationBar.tintColor = condition ? .white : .black
         navigationController?.navigationBar.backgroundColor = condition ? .systemGreen : .clear
+        navigationController?.navigationBar.titleTextAttributes = condition ? [
+            NSAttributedString.Key.foregroundColor : UIColor.white
+        ] : nil
     }
     fileprivate func configure() {
         view.backgroundColor = .systemGreen
         title = presenter?.getNavigationTitle()
         allCardsView.delegate = self
         view.addSubview(allCardsView)
-        colorizeNavBar(true)
-        
-        
+       
         NSLayoutConstraint.activate([
             allCardsView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             allCardsView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50),
             allCardsView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             allCardsView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            
         ])
     }
 }
