@@ -11,7 +11,7 @@ final class CardCell: UICollectionViewCell {
     
     static let identifier: String = "CardCell"
     
-    private var cardImage: UIImageView = {
+    private let cardImage: UIImageView = {
        let image = UIImageView()
         image.layer.cornerRadius = 8
         image.layer.masksToBounds = true

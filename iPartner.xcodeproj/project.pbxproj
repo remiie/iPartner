@@ -35,6 +35,7 @@
 		B6CDF83F2A03159700043489 /* CardDetailPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF83E2A03159700043489 /* CardDetailPresenterProtocol.swift */; };
 		B6CDF8412A0315AC00043489 /* CardDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF8402A0315AC00043489 /* CardDetailPresenter.swift */; };
 		B6CDF8432A0315ED00043489 /* CardDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF8422A0315ED00043489 /* CardDetailView.swift */; };
+		B6CDF8452A03296300043489 /* ExpandableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6CDF8442A03296300043489 /* ExpandableView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		B6CDF83E2A03159700043489 /* CardDetailPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailPresenterProtocol.swift; sourceTree = "<group>"; };
 		B6CDF8402A0315AC00043489 /* CardDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailPresenter.swift; sourceTree = "<group>"; };
 		B6CDF8422A0315ED00043489 /* CardDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardDetailView.swift; sourceTree = "<group>"; };
+		B6CDF8442A03296300043489 /* ExpandableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 			children = (
 				B6CDF8312A02C24300043489 /* CardCell.swift */,
 				B6CDF82F2A02B98E00043489 /* AllCardsView.swift */,
+				B6CDF8442A03296300043489 /* ExpandableView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				B6C44FBC2A028C7B0002341C /* Resources.swift in Sources */,
 				B6CDF83B2A03151400043489 /* CardDetailControllerProtocol.swift in Sources */,
 				B6CDF8322A02C24300043489 /* CardCell.swift in Sources */,
+				B6CDF8452A03296300043489 /* ExpandableView.swift in Sources */,
 				B6CDF8302A02B98E00043489 /* AllCardsView.swift in Sources */,
 				B67CC56A2A028665001CFF76 /* AppDelegate.swift in Sources */,
 				B6CDF81C2A02ABB400043489 /* MainControllerProtocol.swift in Sources */,

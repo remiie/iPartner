@@ -14,12 +14,6 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private var titleView: UILabel = {
-        let label = UILabel()
-        label.text = "Список"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
     private let searchBar = UISearchBar()
     private let expandableView = ExpandableView()
     private var leftConstraint: NSLayoutConstraint!
@@ -114,22 +108,4 @@ extension AllCardsController: AllCardsViewDelegate {
     }
     
     
-}
-
-class ExpandableView: UIView {
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        backgroundColor = .clear
-        translatesAutoresizingMaskIntoConstraints = false
-        
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override var intrinsicContentSize: CGSize {
-        return UIView.layoutFittingExpandedSize
-    }
 }

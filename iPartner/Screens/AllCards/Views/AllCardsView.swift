@@ -11,7 +11,7 @@ final class AllCardsView: UIView, AllCardsViewProtocol {
     
     var delegate: AllCardsViewDelegate?
     
-    let collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.translatesAutoresizingMaskIntoConstraints = false
       //  view.backgroundColor = .blue
