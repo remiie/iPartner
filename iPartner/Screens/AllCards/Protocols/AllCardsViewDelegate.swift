@@ -7,6 +7,11 @@
 
 import UIKit
 
-protocol AllCardsViewDelegate: AnyObject {
-    
+typealias CardData = (title: String, description: String, image: UIImage?)
+
+protocol AllCardsViewDelegate {
+
+    func getItemsCount() -> Int
+    func getCardData(at index: Int) -> CardData
+    func selectCard(at index: Int)
 }

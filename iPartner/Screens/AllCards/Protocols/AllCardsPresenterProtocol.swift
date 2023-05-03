@@ -8,5 +8,6 @@
 import Foundation
 
 protocol AllCardsPresenterProtocol: AnyObject {
-    
+    func getNavigationTitle() -> String
+    func getImageName(forCard id: Int) -> String
 }
