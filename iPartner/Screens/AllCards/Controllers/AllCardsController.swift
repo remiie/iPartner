@@ -28,11 +28,12 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
         colorizeNavBar(true)
+        title = presenter?.getNavigationTitle()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        colorizeNavBar(false)
+        title = ""
     }
     
     func colorizeNavBar(_ condition: Bool) {
@@ -56,7 +57,6 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
     
     fileprivate func configure() {
         view.backgroundColor = .systemGreen
-        title = presenter?.getNavigationTitle()
         allCardsView.delegate = self
         view.addSubview(allCardsView)
         configureExpandableView()
@@ -88,6 +88,8 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
 extension AllCardsController: AllCardsViewDelegate {
     func selectCard(at index: Int) {
         presenter?.selectCard(at: index)
+        showNavBar()
+        navigationItem.titleView = nil
     }
     
     func getItemsCount() -> Int {

@@ -26,7 +26,6 @@ final class CardDetailController: UIViewController, CardDetailControllerProtocol
     
     fileprivate func configure() {
         view.addSubview(cardDetailView)
-        
         view.backgroundColor = .systemGreen
         navigationController?.navigationBar.tintColor = .white
         NSLayoutConstraint.activate([
