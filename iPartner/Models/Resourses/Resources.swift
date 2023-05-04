@@ -20,5 +20,10 @@ struct Resources {
         static var emptyImageName: String = "empty_image"
     }
     
+    enum CardView {
+        static var buyButtonImageName: String = "location_icon"
+        static var favoritesButtonImageName: String = "favorites_image"
+    }
+    
     
 }
