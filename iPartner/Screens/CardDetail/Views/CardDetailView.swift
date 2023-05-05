@@ -13,6 +13,7 @@ final class CardDetailView: UIView, CardDetailViewProtocol {
     
     private let topStackView = UIStackView()
     private let mainStackView = UIStackView()
+    private let activityIndicator = UIActivityIndicatorView(style: .medium)
     
     private let iconImage: UIImageView = {
         let image = UIImageView()
@@ -85,9 +86,12 @@ final class CardDetailView: UIView, CardDetailViewProtocol {
 
     fileprivate func layoutViews() {
         addSubview(mainStackView)
+        topStackView.addSubview(activityIndicator)
+        activityIndicator.hidesWhenStopped = true
         
         topStackView.translatesAutoresizingMaskIntoConstraints = false
         mainStackView.translatesAutoresizingMaskIntoConstraints = false
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             iconImage.widthAnchor.constraint(equalToConstant: 32),
@@ -106,6 +110,9 @@ final class CardDetailView: UIView, CardDetailViewProtocol {
             mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             mainStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20),
+            
+            activityIndicator.centerXAnchor.constraint(equalTo: topStackView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: topStackView.centerYAnchor)
            
         ])
         
@@ -114,7 +121,7 @@ final class CardDetailView: UIView, CardDetailViewProtocol {
     fileprivate func configureViews() {
         
         backgroundColor = .white
-    
+        activityIndicator.startAnimating()
         topStackView.addArrangedSubview(iconImage)
         topStackView.spacing = 20
         topStackView.addArrangedSubview(cardImage)
@@ -167,6 +174,7 @@ final class CardDetailView: UIView, CardDetailViewProtocol {
         NetworkManager.shared.loadImage(from: image) { [self] result in
                 switch result {
                 case .success(let loadedImage):
+                        activityIndicator.stopAnimating()
                         self.cardImage.image = loadedImage
                 case .failure(let error):
                     print(error.localizedDescription) }

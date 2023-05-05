@@ -9,6 +9,7 @@ import UIKit
 
 protocol AllCardsViewProtocol: UIView {
     var delegate: AllCardsViewDelegate? { get set }
+    var activityIndicator: UIActivityIndicatorView { get }
     func updateView(at indexPaths: [IndexPath])
     func updateView()
 }

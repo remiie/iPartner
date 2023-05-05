@@ -13,7 +13,7 @@ final class AllCardsPresenter: AllCardsPresenterProtocol {
     private var router: RouterProtocol?
     private weak var view: AllCardsViewProtocol?
     private let network = NetworkManager.shared
-    private let cardsLimit = 6
+    private let cardsLimit = Resources.cardsLimit
     
     init(router: RouterProtocol, view: AllCardsViewProtocol) {
         self.view = view
@@ -68,6 +68,7 @@ final class AllCardsPresenter: AllCardsPresenterProtocol {
     }
     
     func getCardsBy(offset: Int) {
+        view?.activityIndicator.startAnimating()
         network.fetchCards(offset: offset, limit: cardsLimit) { [self] result in
             switch result {
             case .success(let drugs):
@@ -79,6 +80,7 @@ final class AllCardsPresenter: AllCardsPresenterProtocol {
                 let indexPaths = (startIndex...endIndex).map { IndexPath(row: $0, section: 0) }
                 
                 DispatchQueue.main.async { [self] in
+                    view?.activityIndicator.stopAnimating()
                     view?.updateView(at: indexPaths)
                 }
             case .failure(let error):
