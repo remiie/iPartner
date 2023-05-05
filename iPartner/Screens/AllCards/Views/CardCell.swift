@@ -11,7 +11,7 @@ final class CardCell: UICollectionViewCell {
     
     static let identifier: String = "CardCell"
     
-    private let cardImage: UIImageView = {
+     var cardImage: UIImageView = {
        let image = UIImageView()
         image.layer.cornerRadius = 8
         image.layer.masksToBounds = true
@@ -63,19 +63,19 @@ final class CardCell: UICollectionViewCell {
         ])
     }
     
-    public func configure(title: String, description: String, image: UIImage?) {
-        self.backgroundColor = .clear
+    public func configure(title: String, description: String, image: String) {
+      //  self.backgroundColor = .clear
         self.cardTitle.text = title
         self.cardDescription.text = description
-        self.cardImage.image = image
-        self.cardImage.contentMode = .scaleAspectFit
-        self.cardImage.backgroundColor = .black
+      //  self.cardImage.image = UIImage(named: Resources.AllCardsScreen.emptyImageName)
+     //   self.cardImage.contentMode = .scaleAspectFit
         
         self.layer.masksToBounds = true
         self.layer.borderWidth = 1.5
         self.layer.cornerRadius = 15
         self.layer.borderColor = UIColor( red: 230/255, green: 230/255, blue:230/255, alpha: 1.0 ).cgColor
     }
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

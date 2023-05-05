@@ -7,7 +7,7 @@
 
 import UIKit
 
-typealias CardData = (title: String, description: String, image: UIImage?)
+typealias CardData = (title: String, description: String, image: String?)
 
 protocol AllCardsViewDelegate {
 
