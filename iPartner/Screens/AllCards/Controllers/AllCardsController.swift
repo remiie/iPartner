@@ -128,6 +128,7 @@ extension AllCardsController: AllCardsViewDelegate {
 extension AllCardsController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
         searchTask?.cancel()
 
         let task = DispatchWorkItem { [self] in
