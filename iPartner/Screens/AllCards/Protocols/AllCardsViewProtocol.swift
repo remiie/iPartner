@@ -9,4 +9,5 @@ import UIKit
 
 protocol AllCardsViewProtocol: UIView {
     var delegate: AllCardsViewDelegate? { get set }
+    func updateView()
 }

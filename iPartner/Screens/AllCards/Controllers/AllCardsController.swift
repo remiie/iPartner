@@ -17,12 +17,30 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
     private let searchBar = UISearchBar()
     private let expandableView = ExpandableView()
     private var leftConstraint: NSLayoutConstraint!
-    
+   
+    private let network = NetworkManager.shared
+    private var cards = Cards()
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
+        loadCards(from: 1)
+
+
     }
     
+    func loadCards(from offset: Int) {
+        network.fetchCards(offset: offset, limit: 6) { [self] result in
+            switch result {
+            case .success(let drugs):
+                cards = drugs
+                DispatchQueue.main.async { [self] in
+                    allCardsView.updateView()
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -93,11 +111,13 @@ extension AllCardsController: AllCardsViewDelegate {
     }
     
     func getItemsCount() -> Int {
-        return 10
+        return self.cards.count
     }
     
     func getCardData(at index: Int) -> CardData {
-        let data = ("Title", "Description", UIImage(named: Resources.AllCardsScreen.emptyImageName))
+        let title = cards[index].name
+        let description = cards[index].description
+        let data = (title ?? "", description ?? "", UIImage(named: Resources.AllCardsScreen.emptyImageName))
         return data
     }
     func hideNavBar() {

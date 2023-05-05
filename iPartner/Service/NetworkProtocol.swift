@@ -8,5 +8,5 @@
 import Foundation
 
 protocol NetworkProtocol: AnyObject {
-    
+    func fetchCards(offset: Int, limit: Int, completion: @escaping (Result<Cards, Error>) -> ())
 }
