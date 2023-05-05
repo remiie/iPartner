@@ -31,10 +31,11 @@ final class CardCell: UICollectionViewCell {
     
     private let cardDescription: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 5
         label.textColor = .gray
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: 18, weight: .bold)
+      //  label.textAlignment = .left
+        label.contentMode = .topLeft
+        label.font = .systemFont(ofSize: 18, weight: .light)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -57,19 +58,14 @@ final class CardCell: UICollectionViewCell {
             
             cardDescription.topAnchor.constraint(equalTo: cardTitle.bottomAnchor, constant: 6),
             cardDescription.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
-            cardDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
-            // cardDescription.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -15)
-
+            cardDescription.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12)
         ])
     }
     
     public func configure(title: String, description: String, image: String) {
-      //  self.backgroundColor = .clear
         self.cardTitle.text = title
         self.cardDescription.text = description
-      //  self.cardImage.image = UIImage(named: Resources.AllCardsScreen.emptyImageName)
-     //   self.cardImage.contentMode = .scaleAspectFit
-        
+
         self.layer.masksToBounds = true
         self.layer.borderWidth = 1.5
         self.layer.cornerRadius = 15

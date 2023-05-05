@@ -14,14 +14,12 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
     private let searchBar = UISearchBar()
     private let expandableView = ExpandableView()
     private var leftConstraint: NSLayoutConstraint!
-   
-    private let network = NetworkManager.shared
     private var searchTask: DispatchWorkItem?
     
-    private var cards = Cards()
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
@@ -30,24 +28,7 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
     }
     
     func loadCards(from offset: Int) {
-        let cardsLimit = 6
-        network.fetchCards(offset: offset, limit: cardsLimit) { [self] result in
-            switch result {
-            case .success(let drugs):
-                guard !drugs.isEmpty else { return }
-                cards.append(contentsOf: drugs)
-                
-                let startIndex = cards.count - drugs.count
-                let endIndex = cards.count - 1
-                let indexPaths = (startIndex...endIndex).map { IndexPath(row: $0, section: 0) }
-                
-                DispatchQueue.main.async { [self] in
-                    allCardsView.updateView(at: indexPaths)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+        presenter?.getCardsBy(offset: offset)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +43,7 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
         title = ""
     }
     
-    func colorizeNavBar(_ condition: Bool) {
+    fileprivate func colorizeNavBar(_ condition: Bool) {
         navigationController?.navigationBar.topItem?.title = " "
         navigationController?.navigationBar.tintColor = .white
         navigationController?.navigationBar.titleTextAttributes = condition ? [
@@ -70,7 +51,7 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
         ] : nil
     }
     
-    func configureExpandableView() {
+    fileprivate func configureExpandableView() {
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         expandableView.addSubview(searchBar)
         leftConstraint = searchBar.leftAnchor.constraint(equalTo: expandableView.leftAnchor)
@@ -115,27 +96,20 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
 extension AllCardsController: AllCardsViewDelegate {
     
     func selectCard(at index: Int) {
-        guard let id = cards[index].id else { return }
-        presenter?.selectCard(at: id)
+        presenter?.selectCard(at: index)
         showNavBar()
         navigationItem.titleView = nil
     }
     
     func getItemsCount() -> Int {
-        return self.cards.count
+        presenter?.getItemsCount() ?? 0
     }
     
     func getCardData(at index: Int) -> CardData {
-        let title = cards[index].name
-        let description = cards[index].description
-
-        let imageUrl = cards[index].categories?.image
-            
-            
-        let data = (title ?? "",
-                    description ?? "",
-                    imageUrl ?? "")
-        return data
+        let title = presenter?.getCardName(at: index) ?? ""
+        let description = presenter?.getCardDescription(at: index) ?? ""
+        let imageUrl = presenter?.getCardImageName(at: index) ?? ""
+        return (title, description, imageUrl)
     }
     func hideNavBar() {
         navigationController?.setNavigationBarHidden(true, animated: true)
@@ -154,30 +128,12 @@ extension AllCardsController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchTask?.cancel()
 
-        let task = DispatchWorkItem { [weak self] in
-            guard let self = self, let searchQuery = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-            self.searchCards(searchQuery)
+        let task = DispatchWorkItem { [self] in
+            guard let searchQuery = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+            presenter?.searchCards(query: searchQuery)
         }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task)
         searchTask = task
-    }
-
-    func searchCards(_ searchQuery: String) {
-        network.fetchCards(offset: 0, limit: 1, search: searchQuery) { [self] result in
-            
-            switch result {
-            case .success(let drugs):
-                guard !drugs.isEmpty else { return }
-                cards = drugs
-        
-                DispatchQueue.main.async { [self] in
-                    allCardsView.updateView()
-                }
-            case .failure(let error):
-                print(error)
-            }
-            
-        }
     }
 }

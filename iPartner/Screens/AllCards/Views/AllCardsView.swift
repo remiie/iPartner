@@ -8,16 +8,6 @@
 import UIKit
 
 final class AllCardsView: UIView, AllCardsViewProtocol {
-    func updateView(at indexPaths: [IndexPath]) {
-        collectionView.performBatchUpdates({
-            collectionView.insertItems(at: indexPaths)
-        }, completion: nil)
-    }
-    
-    
-    func updateView() {
-        collectionView.reloadData()
-    }
 
     var delegate: AllCardsViewDelegate?
     var offset = 0
@@ -26,7 +16,6 @@ final class AllCardsView: UIView, AllCardsViewProtocol {
     private let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         view.translatesAutoresizingMaskIntoConstraints = false
-      //  view.backgroundColor = .blue
         return view
     }()
     
@@ -60,6 +49,17 @@ final class AllCardsView: UIView, AllCardsViewProtocol {
         collectionView.register(CardCell.self, forCellWithReuseIdentifier: CardCell.identifier)
     }
     
+    func updateView(at indexPaths: [IndexPath]) {
+        collectionView.performBatchUpdates({
+            collectionView.insertItems(at: indexPaths)
+        }, completion: nil)
+    }
+    
+    
+    func updateView() {
+        collectionView.reloadData()
+    }
+    
 }
 
 extension AllCardsView: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -77,13 +77,14 @@ extension AllCardsView: UICollectionViewDelegate, UICollectionViewDataSource {
                        description: cellData.description,
                        image: cellData.image ?? "")
         
+        
         if let categoryIcon = cellData.image {
             NetworkManager.shared.loadImage(from: categoryIcon) { result in
                  switch result {
                  case .success(let image):
                      cell.cardImage.image = image
                  case .failure(let error):
-                     print("Failed to load icon: \(error)")
+                     print(error.localizedDescription)
                  }
              }
          } else {
@@ -96,7 +97,6 @@ extension AllCardsView: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let count = delegate?.getItemsCount() ?? -1
         if indexPath.row == count - 1 {
-            // Загрузить дополнительные данные, если прокрутили до последней ячейки
             offset += limit
             delegate?.loadCards(from: offset)
         }
