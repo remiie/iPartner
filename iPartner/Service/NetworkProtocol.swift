@@ -11,4 +11,5 @@ import Foundation
 protocol NetworkProtocol: AnyObject {
     func fetchCards(offset: Int, limit: Int, completion: @escaping (Result<Cards, Error>) -> ())
     func loadImage(from urlString: String, completion: @escaping (Result<UIImage?, Error>) -> ())
+    func fetchItem(id: Int, completion: @escaping (Result<Card, Error>) -> ())
 }

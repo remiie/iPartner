@@ -10,4 +10,5 @@ import UIKit
 protocol CardDetailControllerProtocol: AnyObject {
     var cardDetailView: CardDetailViewProtocol { get }
     var presenter: CardDetailPresenterProtocol? { get set }
+
 }

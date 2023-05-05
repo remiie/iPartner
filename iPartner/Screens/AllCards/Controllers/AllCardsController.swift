@@ -25,7 +25,6 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
         configure()
         loadCards(from: 1)
 
-
     }
     
     func loadCards(from offset: Int) {
@@ -104,8 +103,10 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
 }
 
 extension AllCardsController: AllCardsViewDelegate {
+    
     func selectCard(at index: Int) {
-        presenter?.selectCard(at: index)
+        guard let id = cards[index].id else { return }
+        presenter?.selectCard(at: id)
         showNavBar()
         navigationItem.titleView = nil
     }

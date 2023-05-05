@@ -17,7 +17,7 @@ final class AllCardsPresenter: AllCardsPresenterProtocol {
     }
     
     func selectCard(at index: Int) {
-        router?.openCardDetailScreen()
+        router?.openCardDetailScreen(for: index)
     }
     
     

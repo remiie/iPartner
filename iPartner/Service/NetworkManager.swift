@@ -74,25 +74,22 @@ final class NetworkManager: NetworkProtocol {
         }
         task.resume()
     }
-    
 }
 
 extension NetworkManager {
-     func loadImage(from urlString: String, completion: @escaping (Result<UIImage?, Error>) -> ()) {
-         
-         var imageComponents = baseComponents
-         imageComponents.path = urlString
-         print(imageComponents.string!)
-         
-         
-         guard let url = imageComponents.url else {
-             completion(.failure(NetworkError.invalidURL))
-             return
-         }
-         
-         var request = URLRequest(url: url)
-         request.httpMethod = "GET"
-         
+    func loadImage(from urlString: String, completion: @escaping (Result<UIImage?, Error>) -> ()) {
+        
+        var imageComponents = baseComponents
+        imageComponents.path = urlString
+        
+        guard let url = imageComponents.url else {
+            completion(.failure(NetworkError.invalidURL))
+            return
+        }
+        print(url)
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 completion(.failure(error))
@@ -108,6 +105,45 @@ extension NetworkManager {
             completion(.success(image))
         }
         
+        task.resume()
+    }
+}
+
+extension NetworkManager {
+    
+    func fetchItem(id: Int, completion: @escaping (Result<Card, Error>) -> ()) {
+        var components = itemComponents
+        components.queryItems = [URLQueryItem(name: "id", value: "\(id)")]
+        
+        guard let url = components.url else {
+            completion(.failure(NetworkError.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NetworkError.invalidData))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let card = try decoder.decode(Card.self, from: data)
+                completion(.success(card))
+            } catch {
+                completion(.failure(error))
+            }
+        }
         task.resume()
     }
 }
