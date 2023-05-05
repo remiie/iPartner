@@ -23,23 +23,62 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
-        loadCards(from: 1)
+        loadCards(from: 0)
 
     }
     
     func loadCards(from offset: Int) {
-        network.fetchCards(offset: offset, limit: 6) { [self] result in
+        let cardsLimit = 6
+        network.fetchCards(offset: offset, limit: cardsLimit) { [self] result in
             switch result {
             case .success(let drugs):
-                cards = drugs
+                guard !drugs.isEmpty else { return }
+                cards.append(contentsOf: drugs)
+                let startIndex = cards.count - drugs.count
+                let endIndex = cards.count - 1
+                var indexPaths = (startIndex...endIndex).map { IndexPath(row: $0, section: 0) }
                 DispatchQueue.main.async { [self] in
-                    allCardsView.updateView()
+                    allCardsView.updateView(at: indexPaths)
+
                 }
             case .failure(let error):
                 print(error)
             }
         }
     }
+    
+    
+//    func loadCards(from offset: Int) {
+//        let limit = 6
+//        network.fetchCards(offset: offset, limit: limit) { [self] result in
+//            switch result {
+//            case .success(let drugs):
+//                cards.append(contentsOf: drugs)
+//                let count = drugs.count
+//                let startIndex = cards.count - count
+//                let endIndex = cards.count - 1
+//                let indexPaths = (startIndex...endIndex).map { IndexPath(row: $0, section: 0) }
+//                print(indexPaths)
+//                DispatchQueue.main.async { [self] in
+//                    allCardsView.updateView(at: indexPaths)
+//                }
+//                // If we got less items than the limit, we reached the end of the list
+//                if count < limit {
+//                    let additionalIndexPaths = ((endIndex + 1)...(endIndex + count)).map { IndexPath(row: $0, section: 0) }
+//                    DispatchQueue.main.async { [self] in
+//                        allCardsView.updateView(at: additionalIndexPaths)
+//                    }
+//                } else {
+//                    // Load more items
+//                    loadCards(from: offset + limit)
+//                }
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
+
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

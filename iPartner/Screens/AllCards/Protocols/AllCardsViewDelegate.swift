@@ -17,4 +17,6 @@ protocol AllCardsViewDelegate {
     
     func hideNavBar()
     func showNavBar()
+    
+    func loadCards(from offset: Int)
 }

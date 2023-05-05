@@ -8,12 +8,20 @@
 import UIKit
 
 final class AllCardsView: UIView, AllCardsViewProtocol {
-    
-    func updateView() {
-        collectionView.reloadData()
+    func updateView(at indexPaths: [IndexPath]) {
+        collectionView.performBatchUpdates({
+            collectionView.insertItems(at: indexPaths)
+        }, completion: nil)
     }
+    
+    
+//    func updateView() {
+//        collectionView.reloadData()
+//    }
 
     var delegate: AllCardsViewDelegate?
+    var offset = 0
+    let limit = 6
     
     private let collectionView: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -26,7 +34,6 @@ final class AllCardsView: UIView, AllCardsViewProtocol {
         super.init(frame: frame)
         layoutViews()
         configureViews()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -86,9 +93,16 @@ extension AllCardsView: UICollectionViewDelegate, UICollectionViewDataSource {
         return cell
     }
 
-        
-        
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let count = delegate?.getItemsCount() ?? -1
+        if indexPath.row == count - 1 {
+            // Загрузить дополнительные данные, если прокрутили до последней ячейки
+            offset += limit
+            delegate?.loadCards(from: offset)
+        }
     }
+        
+}
 
 
 extension AllCardsView: UICollectionViewDelegateFlowLayout {
