@@ -74,6 +74,49 @@ final class NetworkManager: NetworkProtocol {
         }
         task.resume()
     }
+    
+    
+    func fetchCards(offset: Int, limit: Int, search: String, completion: @escaping (Result<Cards, Error>) -> ()) {
+        var components = сardsComponents
+        components.queryItems = [
+            URLQueryItem(name: "offset", value: "\(offset)"),
+            URLQueryItem(name: "limit", value: "\(limit)"),
+            URLQueryItem(name: "string", value: "\(search)")
+        ]
+        
+        guard let url = components.url else {
+            completion(.failure(NetworkError.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completion(.failure(NetworkError.invalidData))
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                decoder.keyDecodingStrategy = .convertFromSnakeCase
+                let cards = try decoder.decode(Cards.self, from: data)
+                completion(.success(cards))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+        task.resume()
+    }
+    
+    
 }
 
 extension NetworkManager {

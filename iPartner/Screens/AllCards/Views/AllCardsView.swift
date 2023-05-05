@@ -15,9 +15,9 @@ final class AllCardsView: UIView, AllCardsViewProtocol {
     }
     
     
-//    func updateView() {
-//        collectionView.reloadData()
-//    }
+    func updateView() {
+        collectionView.reloadData()
+    }
 
     var delegate: AllCardsViewDelegate?
     var offset = 0

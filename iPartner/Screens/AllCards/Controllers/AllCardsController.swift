@@ -19,6 +19,8 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
     private var leftConstraint: NSLayoutConstraint!
    
     private let network = NetworkManager.shared
+    private var searchTask: DispatchWorkItem?
+    
     private var cards = Cards()
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,51 +36,19 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
             case .success(let drugs):
                 guard !drugs.isEmpty else { return }
                 cards.append(contentsOf: drugs)
+                
                 let startIndex = cards.count - drugs.count
                 let endIndex = cards.count - 1
-                var indexPaths = (startIndex...endIndex).map { IndexPath(row: $0, section: 0) }
+                let indexPaths = (startIndex...endIndex).map { IndexPath(row: $0, section: 0) }
+                
                 DispatchQueue.main.async { [self] in
                     allCardsView.updateView(at: indexPaths)
-
                 }
             case .failure(let error):
                 print(error)
             }
         }
     }
-    
-    
-//    func loadCards(from offset: Int) {
-//        let limit = 6
-//        network.fetchCards(offset: offset, limit: limit) { [self] result in
-//            switch result {
-//            case .success(let drugs):
-//                cards.append(contentsOf: drugs)
-//                let count = drugs.count
-//                let startIndex = cards.count - count
-//                let endIndex = cards.count - 1
-//                let indexPaths = (startIndex...endIndex).map { IndexPath(row: $0, section: 0) }
-//                print(indexPaths)
-//                DispatchQueue.main.async { [self] in
-//                    allCardsView.updateView(at: indexPaths)
-//                }
-//                // If we got less items than the limit, we reached the end of the list
-//                if count < limit {
-//                    let additionalIndexPaths = ((endIndex + 1)...(endIndex + count)).map { IndexPath(row: $0, section: 0) }
-//                    DispatchQueue.main.async { [self] in
-//                        allCardsView.updateView(at: additionalIndexPaths)
-//                    }
-//                } else {
-//                    // Load more items
-//                    loadCards(from: offset + limit)
-//                }
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
-//    }
-
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -114,6 +84,7 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
     fileprivate func configure() {
         view.backgroundColor = .systemGreen
         allCardsView.delegate = self
+        searchBar.delegate = self
         view.addSubview(allCardsView)
         configureExpandableView()
         NSLayoutConstraint.activate([
@@ -140,7 +111,7 @@ final class AllCardsController: UIViewController, AllCardsControllerProtocol {
     }
     
 }
-
+// MARK: - AllCardsViewDelegate
 extension AllCardsController: AllCardsViewDelegate {
     
     func selectCard(at index: Int) {
@@ -174,6 +145,39 @@ extension AllCardsController: AllCardsViewDelegate {
         navigationController?.setNavigationBarHidden(false, animated: true)
         
     }
+        
+}
+// MARK: - SearchBarDelegate
+
+extension AllCardsController: UISearchBarDelegate {
     
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchTask?.cancel()
+
+        let task = DispatchWorkItem { [weak self] in
+            guard let self = self, let searchQuery = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+            self.searchCards(searchQuery)
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: task)
+        searchTask = task
+    }
+
+    func searchCards(_ searchQuery: String) {
+        network.fetchCards(offset: 0, limit: 1, search: searchQuery) { [self] result in
+            
+            switch result {
+            case .success(let drugs):
+                guard !drugs.isEmpty else { return }
+                cards = drugs
+        
+                DispatchQueue.main.async { [self] in
+                    allCardsView.updateView()
+                }
+            case .failure(let error):
+                print(error)
+            }
+            
+        }
+    }
 }
